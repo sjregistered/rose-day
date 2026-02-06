@@ -1,0 +1,870 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap');
+
+/* Global Reset & Base */
+:root {
+  --color-seed: #5D4037;
+  --color-stem: #2E7D32;
+  --color-rose: #E1306C;
+  --color-bg-neutral: #FFF0F5;
+  /* Lavender Blush */
+  --color-bg-rose: #FFC0CB;
+  /* Pink */
+  --color-text-red: #D50000;
+}
+
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  overflow: hidden;
+  /* Prevent scrolling during animations */
+}
+
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 2s ease-in-out;
+}
+
+.bg-neutral {
+  background-color: var(--color-bg-neutral);
+}
+
+.bg-rose {
+  background-color: var(--color-bg-rose);
+  /* Optional: Add a subtle texture or overlay here */
+}
+
+.content-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- Stage 1: Seed --- */
+.seed-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  animation: pulse 2s infinite;
+}
+
+.soil {
+  width: 100px;
+  height: 20px;
+  background: #3E2723;
+  border-radius: 50%;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+.seed-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--color-seed);
+  transition: transform 0.3s ease;
+}
+
+.seed-icon.grow-on-hover:hover {
+  transform: scale(1.1);
+  color: #8B4513;
+}
+
+/* --- Watering Animation --- */
+.watering-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.watering-pot {
+  font-size: 4rem;
+  animation: tipPot 2s ease-in-out infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes tipPot {
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-30deg);
+  }
+}
+
+.droplets {
+  position: absolute;
+  top: 60px;
+  display: flex;
+  gap: 15px;
+}
+
+.drop {
+  font-size: 2.5rem;
+  color: #4facfe;
+  opacity: 0;
+  animation: dropWater 1.5s linear infinite;
+}
+
+.drop-1 {
+  animation-delay: 0s;
+}
+
+.drop-2 {
+  animation-delay: 0.3s;
+}
+
+.drop-3 {
+  animation-delay: 0.6s;
+}
+
+@keyframes dropWater {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(120px);
+    opacity: 0;
+  }
+}
+
+.seed-icon-wrapper.static {
+  animation: none;
+}
+
+/* --- Stage 2: Enhanced Tree Growth --- */
+.tree-container {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 80%;
+  transition: opacity 2s ease;
+}
+
+.tree-wrapper-enhanced {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 400px;
+}
+
+.tree-svg-animated {
+  width: 100%;
+  height: 100%;
+  color: var(--color-stem);
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+/* Base paths for sequential growth */
+.tree-trunk,
+.tree-branch {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: growTreePart 1.5s ease-out forwards;
+}
+
+@keyframes growTreePart {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Sequential timing for tree parts */
+.tree-trunk {
+  animation-delay: 0.2s;
+}
+
+.branch-left-1 {
+  animation-delay: 1.2s;
+}
+
+.branch-right-1 {
+  animation-delay: 1.7s;
+}
+
+.branch-left-2 {
+  animation-delay: 2.2s;
+}
+
+.branch-right-2 {
+  animation-delay: 2.7s;
+}
+
+.branch-left-3 {
+  animation-delay: 3.2s;
+}
+
+.branch-right-3 {
+  animation-delay: 3.7s;
+}
+
+/* --- Enhanced Sequential Blooming --- */
+.roses-overlay-enhanced {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.rose-flower-seq {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  color: var(--color-rose);
+  opacity: 0;
+  transform: scale(0);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  animation: popRose 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popRose {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-45deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Position and sequence roses (Relative to 400x400 wrapper) */
+.rose-1 {
+  top: 70px;
+  left: 180px;
+  animation-delay: 0s;
+}
+
+.rose-2 {
+  top: 120px;
+  left: 80px;
+  animation-delay: 0.6s;
+}
+
+.rose-3 {
+  top: 120px;
+  right: 80px;
+  animation-delay: 1.2s;
+}
+
+.rose-4 {
+  top: 200px;
+  left: 50px;
+  animation-delay: 1.8s;
+}
+
+.rose-5 {
+  top: 200px;
+  right: 50px;
+  animation-delay: 2.4s;
+}
+
+.rose-6 {
+  top: 100px;
+  left: 240px;
+  animation-delay: 3s;
+}
+
+
+/* --- Stage 4 & 5: Proposal Layout Updates --- */
+.proposal-main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+  z-index: 10;
+  width: 100%;
+}
+
+.photo-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* Ensure fade-in works for the new container class */
+.fade-in {
+  opacity: 0.5;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.main-photo {
+  max-width: 90vw;
+  max-height: 45vh;
+  /* Reduced to fit text/buttons on screen */
+  object-fit: contain;
+  border-radius: 12px;
+  border: 4px solid white;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transition: all 1s ease;
+}
+
+.photo-framed {
+  border-color: var(--color-text-red);
+  box-shadow: 0 0 50px rgba(229, 9, 20, 0.6);
+  transform: scale(1.05);
+}
+
+.proposal-content {
+  text-align: center;
+  margin-top: 15px;
+  width: 90%;
+  max-width: 500px;
+}
+
+.fade-in-text {
+  animation: fadeInText 1.5s ease-out forwards;
+}
+
+@keyframes fadeInText {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.proposal-text {
+  font-family: 'Brush Script MT', 'Dancing Script', cursive;
+  font-size: 2.2rem;
+  color: var(--color-text-red);
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.buttons-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+button {
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-yes {
+  background-color: #FF69B4;
+  color: white;
+  z-index: 20;
+  /* Ensure buttons are clickable */
+}
+
+.btn-surely {
+  background-color: #D50000;
+  color: white;
+  z-index: 20;
+}
+
+/* --- Intermediate Modal --- */
+.intermediate-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.intermediate-modal {
+  background: white;
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  transform: scale(0.8);
+  opacity: 0;
+  animation: modalPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards;
+}
+
+@keyframes modalPop {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-text {
+  font-size: 1.2rem;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 5px;
+}
+
+.modal-text-bold {
+  font-size: 1.5rem;
+  color: #D32F2F;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.btn-modal {
+  padding: 12px 30px;
+  border-radius: 40px;
+  border: 2px solid #FF69B4;
+  background: transparent;
+  color: #FF69B4;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-modal:hover {
+  background: #FF69B4;
+  color: white;
+  transform: translateY(-3px);
+}
+
+.btn-modal.highlight {
+  background: #FF69B4;
+  color: white;
+}
+
+.btn-modal.highlight:hover {
+  background: #FF1493;
+  border-color: #FF1493;
+}
+
+/* Fluid Transitions */
+.tree-container.fade-out {
+  animation: fadeOut 1.5s forwards;
+}
+
+.proposal-main-container.fade-in {
+  animation: fadeInEffect 1.5s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes fadeInEffect {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* --- Celebration Overlay --- */
+.celebration-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.celebration-rose-wrapper {
+  position: absolute;
+  /* Start slightly opaque */
+  opacity: 0;
+  animation: floatAndFade ease-in-out forwards;
+}
+
+@keyframes floatAndFade {
+  0% {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-10vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* --- Rose Frame Animation --- */
+.rose-frame-overlay {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  pointer-events: none;
+}
+
+.frame-rose {
+  position: absolute;
+  font-size: 3rem;
+  color: #D50000;
+  animation: bloomRose 0.5s ease-out forwards;
+}
+
+.frame-tl {
+  top: 0;
+  left: 0;
+  transform: rotate(-45deg);
+}
+
+.frame-tr {
+  top: 0;
+  right: 0;
+  transform: rotate(45deg);
+}
+
+.frame-bl {
+  bottom: 0;
+  left: 0;
+  transform: rotate(-135deg);
+}
+
+.frame-br {
+  bottom: 0;
+  right: 0;
+  transform: rotate(135deg);
+}
+
+.celebration-text {
+  font-size: 2rem;
+  color: #880E4F;
+  margin-top: 20px;
+  animation: pulse 1s infinite;
+}
+
+/* --- Cursive Writing Intro --- */
+.slideshow-intro-container {
+  padding: 40px;
+  text-align: center;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+.cursive-intro-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.8rem;
+  color: #880E4F;
+  line-height: 1.4;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+  font-weight: bold;
+}
+
+.cursive-writing {
+  position: relative;
+}
+
+.cursor {
+  display: inline-block;
+  width: 2px;
+  background-color: #880E4F;
+  margin-left: 2px;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* --- Slideshow Styles --- */
+.slideshow-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  animation: fadeIn 1s ease-out;
+}
+
+.slide-wrapper {
+  position: relative;
+  width: 90vw;
+  max-width: 500px;
+  height: 60vh;
+  max-height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  background: white;
+  border: 10px solid white;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide-label-container {
+  margin-top: 20px;
+  min-height: 80px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.slide-label {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  color: var(--color-text-red);
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+  font-weight: bold;
+}
+
+.infinite-celebration {
+  animation-iteration-count: infinite !important;
+}
+
+/* --- Comic Bubble Styles --- */
+.comic-bubble-container {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  width: 90%;
+  max-width: 400px;
+}
+
+.comic-bubble-cloud {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  border: 4px solid #D50000;
+  opacity: 1;
+}
+
+.bubble-text {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #333;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.bubble-tail-1,
+.bubble-tail-2 {
+  position: absolute;
+  background: #ffffff;
+  border: 4px solid #D50000;
+  border-radius: 50%;
+}
+
+.bubble-tail-1 {
+  width: 30px;
+  height: 30px;
+  bottom: -20px;
+  left: 60%;
+}
+
+.bubble-tail-2 {
+  width: 15px;
+  height: 15px;
+  bottom: -35px;
+  left: 65%;
+}
+
+/* --- Mega Celebration Modal --- */
+.mega-celebration-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 500;
+  animation: fadeIn 1s ease-in;
+}
+
+.mega-modal {
+  text-align: center;
+  padding: 50px;
+  background: linear-gradient(135deg, #FFEB3B, #F48FB1);
+  border-radius: 40px;
+  box-shadow: 0 0 100px rgba(255, 105, 180, 0.5);
+  transform: scale(1.2);
+  animation: popScale 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.5) forwards;
+}
+
+.mega-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 4rem;
+  color: #D50000;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mega-subtitle {
+  font-size: 2rem;
+  color: #880E4F;
+  font-weight: bold;
+}
+
+@keyframes popScale {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+.input-container-final {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn-final {
+  padding: 15px 40px;
+  font-size: 1.5rem;
+  background: #D50000;
+  color: #ffffff;
+  border-radius: 50px;
+  border: 2px solid white;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(213, 0, 0, 0.4);
+  transition: all 0.3s;
+  opacity: 1;
+}
+
+.btn-final:hover {
+  transform: scale(1.1) rotate(5deg);
+  background: #FF1744;
+  box-shadow: 0 12px 25px rgba(255, 23, 68, 0.5);
+}
+
+.final-scene-wrapper {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 150;
+  background: linear-gradient(to bottom, #1a237e, #4a148c);
+}
+
+.three-canvas-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.proposal-ui-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 50px;
+  z-index: 10;
+}
+
+.proposal-ui-overlay * {
+  pointer-events: auto;
+}
+
+.input-container-final {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+}
